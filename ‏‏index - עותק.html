@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>צ'אט חי</title>
+    <link rel="stylesheet" href="mysterious-styles.css">
+</head>
+<body>
+    <header>
+        <h1>שלום לצ'אט שלנו</h1>
+    </header>
+
+    <main>
+        <div class="chat-container">
+            <div class="chat-box" id="chatBox">
+                <div class="chat-message">User: Hello!</div>
+                <div class="chat-message">Bot: Hi there! How can I assist you today?</div>
+            </div>
+            <input type="text" placeholder="אז מה אתה רוצה לספר לנו?" id="userMessage">
+            <button onclick="sendMessage()">שלח</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Live Chat. All rights reserved.</p>
+    </footer>
+
+   <script>
+    let isUserTurn = true; // Flag to track whose turn it is
+
+    function sendMessage() {
+        const userMessage = document.getElementById('userMessage').value;
+        
+        if (userMessage.trim() !== '') {
+            const chatBox = document.getElementById('chatBox');
+            const newMessage = document.createElement('div');
+            newMessage.className = isUserTurn ? 'user-message' : 'bot-message';
+            newMessage.textContent = isUserTurn ? 'You: ' + userMessage : 'Bot: Sorry, I am just a demo bot!';
+            chatBox.appendChild(newMessage);
+            document.getElementById('userMessage').value = '';
+            isUserTurn = !isUserTurn;
+        }
+    }
+
+    function generateChatLink() {
+        const chatLink = window.location.href.split('?')[0] + '?chat=join';
+        alert('Share this link with the person you want to connect: ' + chatLink);
+    }
+</script>
+<button onclick="generateChatLink()">Generate Chat Link</button>
+</body>
+</html>
